@@ -1,0 +1,30 @@
+{
+  "canisters": {
+    "pattgen_backend": {
+      "candid": "src/pattgen_backend/pattgen_backend.did",
+      "package": "pattgen_backend",
+      "type": "rust"
+    },
+    "pattgen_frontend": {
+      "dependencies": [
+        "pattgen_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/pattgen_frontend/src/index.html"
+      },
+      "source": [
+        "src/pattgen_frontend/assets",
+        "dist/pattgen_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
