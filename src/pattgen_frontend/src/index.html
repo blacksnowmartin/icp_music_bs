@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>pattgen</title>
-    <base href="/" />
-    <link rel="icon" href="favicon.ico" />
-    <link type="text/css" rel="stylesheet" href="main.css" />
-  </head>
-  <body>
-    <main>
-      <img src="logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#">
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting"></section>
-    </main>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audioprism - Mood</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <img src="logo2.svg" alt="ICP Logo" class="logo">
+        <h1>Audioprism</h1>
+    </div>
+
+    <div class="subtitle">
+        <h2>Mood</h2>
+    </div>
+
+    <div class="navigation">
+        <div class="arrow left" onclick="navigate('previous')">&#8592;</div>
+        <div class="image-grid">
+            <img src="image1.png" alt="Image 1" onclick="sendKeywords('joy','Elation','bright','vibrant')">
+            <img src="image2.png" alt="Image 2"
+                onclick="sendKeywords('tension','suspense','dramatic','intense','dark','stormy','turbulence')">
+            <img src="image3.png" alt="Image 3" onclick="sendKeywords('melancholy','Sadness','introspective')">
+            <img src="image4.png" alt="Image 4" onclick="sendKeywords('tranquility','Peace','calm','serene','still')">
+        </div>
+        <div class="arrow right" onclick="navigate('next')">&#8594;</div>
+    </div>
+</body>
+
 </html>

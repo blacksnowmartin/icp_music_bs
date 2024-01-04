@@ -1,19 +1,10 @@
-import { pattgen_backend } from "../../declarations/pattgen_backend";
+function sendKeywords(keywords) {
+    console.log("Sending keywords:", keywords);
+    // Implement AJAX call or similar to send data to backend
+    // Navigate to the next page after sending data
+}
 
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const button = e.target.querySelector("button");
-
-  const name = document.getElementById("name").value.toString();
-
-  button.setAttribute("disabled", true);
-
-  // Interact with foo actor, calling the greet method
-  const greeting = await pattgen_backend.greet(name);
-
-  button.removeAttribute("disabled");
-
-  document.getElementById("greeting").innerText = greeting;
-
-  return false;
-});
+function navigate(direction) {
+    console.log("Navigating", direction);
+    // Implement logic to navigate to the previous or next page
+}
