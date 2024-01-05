@@ -1,4 +1,8 @@
 service : {
-    "start_gen": (text) -> (text);
-    "check_gen": (text) -> (text);
+    "audio_start_gen": (text) -> (text);
+    "audio_check_gen": (text) -> (text);
+    "image_start_gen": (text) -> (text);
+    "image_check_gen": (text) -> (text);
+    "fetch_image_as_base64": (text) -> (text);
+    "fetch_audio_raw": (text) -> (blob);
 }
