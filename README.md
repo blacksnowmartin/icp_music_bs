@@ -5,7 +5,7 @@
 start the local environment replica
 
 ```bash
-dfx start --background
+dfx start --clean --background
 ```
 
 install npm modules if not already installed
@@ -14,8 +14,7 @@ install npm modules if not already installed
 npm install
 ```
 
-deploy the canister
-
 ```bash
+# deploying front and back
 dfx deploy
 ```

@@ -12,4 +12,11 @@ crate-type = ["cdylib"]
 candid = "0.8"
 ic-cdk = "0.7"
 ic-cdk-timers = "0.1" # Feel free to remove this dependency if you don't need timers
+ic-cdk-macros = "0.7"
+ic-certified-map = "0.3"
+include-base64 = "0.1"
+serde = { version = "1", features = ["derive"] }
 base64 = "0.21.5"
+percent-encoding = "2.1"
+serde_cbor = "0.11.2"
+sha2 = "0.10.2"
