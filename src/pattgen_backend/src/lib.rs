@@ -13,7 +13,7 @@ use serde::Deserialize;
 
 mod http;
 
-const API_KEY: &str = "...";
+const API_KEY: &str = "";
 
 #[ic_cdk::update]
 async fn audio_start_gen(prompt: String) -> String {

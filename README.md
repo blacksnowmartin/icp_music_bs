@@ -16,5 +16,5 @@ npm install
 
 ```bash
 # deploying front and back
-dfx deploy
+dfx deploy --no-wallet
 ```

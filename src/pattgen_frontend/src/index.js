@@ -1,6 +1,9 @@
 import { pattgen_backend } from "../../declarations/pattgen_backend";
 import { Principal } from '@dfinity/principal';
 
+// a global array to store the keywords
+let KEYWORDS = [];
+
 async function setPlayerBackground(url) {
     // no need
     // const base64 = await pattgen_backend.fetch_image_as_base64(url);
@@ -24,56 +27,52 @@ async function createAudioPlayer(audioUrl) {
     playerDiv.appendChild(audioPlayer);
 }
 
-async function activateMintButton(audioUrl) {
-    const mintButton = document.getElementById('mintButton');
-    mintButton.disabled = false;
-    mintButton.onclick = async () => {
-        console.log("Minting NFT ...", audioUrl);
-        mintButton.disabled = true;
-        showLoader();
+async function startMinting(audioUrl) {
+    console.log("Minting NFT ...", audioUrl);
+    mintButton.disabled = true;
+    showLoader();
 
-        // Fetch the audio content as a Blob
-        const audioResponse = await fetch(audioUrl);
-        const audioBlob = await audioResponse.blob();
-        const audioArrayBuffer = await audioBlob.arrayBuffer();
-        const audioBytes = new Uint8Array(audioArrayBuffer);
+    // Fetch the audio content as a Blob
+    const audioResponse = await fetch(audioUrl);
+    const audioBlob = await audioResponse.blob();
+    const audioArrayBuffer = await audioBlob.arrayBuffer();
+    const audioBytes = new Uint8Array(audioArrayBuffer);
 
-        console.log("Audio bytes:", audioBytes);
+    console.log("Audio bytes:", audioBytes);
 
-        // Define the metadata for the NFT (adjust according to your needs)
-        const metadata = [
-        ];
+    // Define the metadata for the NFT (adjust according to your needs)
+    const metadata = [
+    ];
 
-        // Call the mint function from the backend
-        try {
-            const principal = Principal.fromText(icpAddressInput.value); // Convert input to Principal
-            const mintResponse = await pattgen_backend.mintDip721(principal, metadata, Array.from(audioBytes));
-            console.log("Minting response:", mintResponse);
-            const mintMessageDiv = document.getElementById('mintingSection'); // Get the message div
+    // Call the mint function from the backend
+    try {
+        const principal = Principal.fromText(icpAddressInput.value); // Convert input to Principal
+        const mintResponse = await pattgen_backend.mintDip721(principal, metadata, Array.from(audioBytes));
+        console.log("Minting response:", mintResponse);
+        const mintMessageDiv = document.getElementById('mintingSection'); // Get the message div
 
 
-            if (mintResponse.Ok) {
-                mintMessageDiv.textContent = `Minting successful! NFT ID: ${mintResponse.Ok.id}, Token ID: ${mintResponse.Ok.token_id}`;
-            } else {
-                // Handle other potential responses
-                mintMessageDiv.textContent = `Minting response: ${JSON.stringify(mintResponse)}`;
-            }
-
-            mintButton.disabled = true;
-        } catch (error) {
-            console.error("Minting error:", error);
-            mintButton.disabled = false; // Re-enable the button in case of error
-            hideLoader();
+        if (mintResponse.Ok) {
+            mintMessageDiv.textContent = `Minting successful! NFT ID: ${mintResponse.Ok.id}, Token ID: ${mintResponse.Ok.token_id}`;
+        } else {
+            // Handle other potential responses
+            mintMessageDiv.textContent = `Minting response: ${JSON.stringify(mintResponse)}`;
         }
-    };
+
+        mintButton.disabled = true;
+    } catch (error) {
+        console.error("Minting error:", error);
+        mintButton.disabled = false; // Re-enable the button in case of error
+        hideLoader();
+    }
 }
 
 async function generate_all() {
 
-    const prompt = "french rap from marseille";
+    const prompt = KEYWORDS.join(" ");
 
     // set testButton disabled
-    document.getElementById('testButton').disabled = true;
+    document.getElementById('mintButton').disabled = true;
 
     const player = document.getElementById('player');
     player.style.animation = 'gradientBG 5s ease infinite';
@@ -95,7 +94,7 @@ async function generate_all() {
         const promisesEnd = [
             setPlayerBackground(image_url),
             createAudioPlayer(audio_url),
-            activateMintButton(audio_url)
+            startMinting(audio_url)
         ];
 
         await Promise.all(promisesEnd);
@@ -106,7 +105,6 @@ async function generate_all() {
         console.error("Error generating content:", e);
     }
 }
-
 
 async function generate_audio(prompt, progressCb) {
     return new Promise(async (resolve, reject) => {
@@ -242,4 +240,54 @@ function hideLoader() {
     loader.classList.add('hidden');
 }
 
-document.getElementById('testButton').addEventListener('click', generate_all);
+function sendKeywords(keywords) {
+    // split keywords
+    const keywordsArray = keywords.split(",");
+
+    // trim keywords
+    const trimmedKeywordsArray = keywordsArray.map(keyword => keyword.trim());
+
+    // select random one
+    const randomKeyword = trimmedKeywordsArray[Math.floor(Math.random() * trimmedKeywordsArray.length)];
+
+    // add to global array
+    KEYWORDS.push(randomKeyword);
+
+    // // update the #prompt
+    // const prompt = document.getElementById('prompt');
+    // prompt.textContent += " " + randomKeyword;
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('mintButton').addEventListener('click', generate_all);
+    const panelSnap = new PanelSnap();
+
+    window.scrollTo(0, 0);
+
+    // image selection
+    document.querySelectorAll(".image-grid img").forEach(clickedImg => {
+        clickedImg.addEventListener("click", function () {
+            const keywords = clickedImg.alt;
+            sendKeywords(keywords);
+
+            // Get all sibling images and fade them out
+            const siblingImages = clickedImg.parentElement.querySelectorAll('img');
+            siblingImages.forEach(img => {
+                if (img !== clickedImg) {
+                    img.classList.add('fade-out');
+                }
+            });
+
+            setTimeout(() => {
+                const currentSection = clickedImg.closest('section');
+                const nextSection = currentSection.nextElementSibling;
+                if (nextSection) {
+                    panelSnap.snapToPanel(nextSection);
+                }
+            }, 1000); // 1000 milliseconds = 1 second
+
+        });
+    });
+});
+

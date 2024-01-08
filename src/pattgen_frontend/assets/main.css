@@ -1,126 +1,382 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline-offset: 3px;
 }
 
-.header {
-    margin-bottom: 20px;
+*:focus {
+  outline: 3px solid #000000;
+}
+
+body {
+  margin: 0;
+  color: #000000;
+  font-family: 'Lato';
+  font-weight: 300;
+  font-size: 24px;
+  min-height: 100vh;
+  background: #ffffff;
+  text-align: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 70px;
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+
 }
 
 .logo {
-    max-width: 100px;
-    height: auto;
-}
-
-.subtitle h2 {
-    margin: 10px 0;
-}
-
-.navigation {
+    margin-bottom: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
+      padding-bottom: 70px;
+
+  
+}
+
+.header {
+    display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 50px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    padding: 25px;
+  }
+}
+
+section:nth-child(2n) {
+  background: #edf7f5;
+}
+
+.panels section {
+  background: #d6e8e5;
+  min-height: 100%;
+}
+
+.panels section:nth-child(2) {
+  min-height: calc(100% + 200px);
+}
+
+.panels section:nth-child(2n) {
+  background: #c2d6d2;
+}
+
+.panels.horizontal {
+  display: flex;
+}
+
+.panels.horizontal section {
+  min-height: 0;
+  min-width: 100%;
+}
+
+.panels.horizontal section:nth-child(2) {
+  min-width: calc(100% + 200px);
+}
+
+section .explanation,
+section pre {
+  background: #edf7f5;
+}
+
+section:nth-child(2n) .explanation,
+section:nth-child(2n) pre {
+  background: #ffffff;
+}
+
+section.introduction {
+  align-items: center;
+  justify-content: center;
+}
+
+section.introduction .center {
+  text-align: center;
+}
+
+section.introduction .center p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+}
+
+section.introduction .center p a {
+  word-break: break-all;
+}
+
+section.introduction .bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 25px;
+
+  text-align: center;
+  font-size: 60%;
+}
+
+section.introduction .bottom:after {
+  display: block;
+  margin: 1em auto 0;
+  height: 20px;
+  width: 20px;
+
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  content: '';
+
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+section.options,
+section.options_explained {
+  min-height: 100vh;
+  height: auto;
+}
+
+h1 {
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 250%;
+  margin: 0 0 15px;    
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 180%;
+  }
+}
+
+h2 {
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.group {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -25px;
+}
+
+.group > * {
+  margin: 25px;
+}
+
+.panels,
+pre {
+  flex-grow: 99999;
+  flex-basis: 300px;
+}
+
+.panels {
+  overflow: auto;
+}
+
+.explanation,
+pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .explanation,
+  pre {
+    padding: 25px;
+  }
+}
+
+.explanation dt,
+pre {
+  font-size: 80%;
+  font-family: Ubunutu Mono, monospace;
+}
+
+.explanation {
+  flex-grow: 1;
+}
+
+.explanation dt:after {
+  content: ':';
+}
+
+.explanation dd {
+  margin: 0 0 0 10px;
+}
+
+.explanation dd + dt {
+  margin: 25px 0 0;
+}
+
+.aside {
+  flex-grow: 1;
+  flex-basis: 300px;
+}
+
+.aside > *:first-child {
+  margin-top: 0;
+}
+
+.aside > *:last-child {
+  margin-bottom: 0;
 }
 
 .image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin: 0 20px;
+    display: flex;
+    padding-top: 30px;
+    justify-content: center;
+        gap: 10px;
+    
+    
+}
+.image-grid > img {
+    width: 25%;
+    object-fit: contain;
 }
 
-.image-grid img {
-    width: 100%;
-    height: auto;
-    cursor: pointer;
+.responsive-video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
 }
 
-.arrow {
-    cursor: pointer;
-    font-size: 24px;
-    user-select: none;
+.responsive-video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-container > div {
+  padding: 10px;
+  margin: 5px;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
 }
 
 #player {
-    width: 256px;
-    height: 256px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #000; /* Optional, for visual clarity */
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: none;
-    margin-left: auto;
-    margin-right: auto;
+  width: 256px;
+  height: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px; /* Updated for a smoother border */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  margin: 2rem auto; /* Added some margin to center it */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
 }
 
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* General styling for the input and button */
+/* Shared styles for input and button */
 #icpAddressInput, #mintButton {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif; /* Use Lato font */
 }
 
-/* Specific styling for the input field */
+/* Input field - full width on mobile */
 #icpAddressInput {
-    width: 400px; /* Adjust the width as needed */
+  width: calc(100% - 20px); /* Full width minus padding */
+  max-width: 400px; /* Maximum width */
 }
 
-/* Styling for the button */
+
+/* Button full width on mobile, inline on desktop */
 #mintButton {
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    border: none;
-    cursor: pointer; /* Change cursor on hover */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  width: calc(100% - 20px); /* Full width minus padding */
+  max-width: 200px; /* Maximum width */
+  margin-top: 1rem; /* Add some space above the button */
 }
 
+/* Adjust the loader size and position */
+#mintLoader {
+  width: 40px;
+  height: 40px;
+  margin-top: 1rem; /* Add some space above the loader */
+}
 /* Hover effect for the button */
 #mintButton:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 /* Disabled state for the button */
 #mintButton:disabled {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 #mintLoader {
-    border: 5px solid #f3f3f3; /* Light grey border */
-    border-top: 5px solid #3498db; /* Blue border */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
+  border: 5px solid #f3f3f3; /* Light grey border */
+  border-top: 5px solid #3498db; /* Blue border */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
+/* Updated the minting section layout */
 #mintingSection {
-    display: flex;
-    align-items: center; /* Align vertically */
-    justify-content: space-around; /* Space out the elements */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
 /* Add styles for visibility transition */
 .visible {
-    display: block;
+  display: block;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
