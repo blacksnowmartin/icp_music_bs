@@ -1,8 +1,17 @@
 # Audioprism
 
 -----------------------------------------
+## Demo 
 
-Demo video: https://youtu.be/EOiC9ThiIoQ
+https://youtu.be/EOiC9ThiIoQ
+
+-----------------------------------------
+## Overview 
+
+Audioprism is a decentralized application based on ICP and relying on Musicgen & Stable diffusion AI models. 
+It allows anybody able to create an ICP wallet to mint generative NFTs (both sound & image), without any prior technical knowledge about AI or blockchain.
+The process is straight forward: user is being asked questions, he/she answers just by clicking on images whose hidden attributes / keywords get combined to generate the NFT.
+User provides his/her ICP address, and get sent the NFT as soon as it gets minted.
 
 -----------------------------------------
 
