@@ -33,3 +33,4 @@ npm install
 # deploying front and back
 dfx deploy --no-wallet
 ```
+Reviewed by Martin Kitonga
